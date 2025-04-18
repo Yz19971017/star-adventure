@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>星際大冒險</title>
+  <style>
+    body { font-family: sans-serif; background: black; color: white; padding: 2em; }
+    button { padding: 10px; margin-top: 1em; }
+  </style>
+</head>
+<body>
+  <h1>星際大冒險</h1>
+  <p id="story">你駕駛太空船，正在宇宙中航行...</p>
+  <button onclick="next()">繼續冒險</button>
+
+  <script>
+    const storyLines = [
+      "你發現了一個神秘星球！",
+      "外星人出現了！你選擇交朋友。",
+      "你撿到了一把傳說級雷射槍！",
+      "遭遇太空海盜，成功逃脫！",
+      "你找到一個隱藏寶箱，裡面有強化裝備！"
+    ];
+    let index = 0;
+    function next() {
+      if (index < storyLines.length) {
+        document.getElementById("story").innerText = storyLines[index++];
+      } else {
+        document.getElementById("story").innerText = "冒險結束！謝謝你玩《星際大冒險》！";
+      }
+    }
+  </script>
+</body>
+</html>
