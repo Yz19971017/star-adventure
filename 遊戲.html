@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>星際大冒險</title>
+  <style>
+    body { font-family: sans-serif; background-color: #000; color: #0f0; padding: 20px; }
+    button { margin-top: 10px; }
+    #log { margin-top: 20px; max-height: 300px; overflow-y: auto; background: #111; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>星際大冒險</h1>
+  <p>等級：<span id="level">1</span>　經驗值：<span id="exp">0</span> / <span id="expMax">100</span></p>
+  <p>金錢：<span id="gold">0</span>　戰力：<span id="power">10</span></p>
+  <button onclick="fight()">出擊！</button>
+  <div id="log"></div>
+
+  <script>
+    let level = 1, exp = 0, expMax = 100, gold = 0, power = 10;
+
+    function log(msg) {
+      const logBox = document.getElementById('log');
+      logBox.innerHTML += '<div>' + msg + '</div>';
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    function fight() {
+      const expGain = Math.floor(Math.random() * 20 + 10);
+      const goldGain = Math.floor(Math.random() * 10 + 5);
+      const dropChance = Math.random();
+      exp += expGain;
+      gold += goldGain;
+
+      if (dropChance > 0.7) {
+        const equipPower = Math.floor(Math.random() * 5 + 5);
+        power += equipPower;
+        log('你擊敗了敵人！獲得 ' + expGain + ' 經驗、' + goldGain + ' 金幣，並撿到提升戰力 +' + equipPower + ' 的裝備！');
+      } else {
+        log('你擊敗了敵人！獲得 ' + expGain + ' 經驗、' + goldGain + ' 金幣。');
+      }
+
+      if (exp >= expMax) {
+        level++;
+        exp -= expMax;
+        expMax = Math.floor(expMax * 1.2);
+        log('<strong>升級啦！你現在是 Lv.' + level + '</strong>');
+      }
+
+      document.getElementById('level').textContent = level;
+      document.getElementById('exp').textContent = exp;
+      document.getElementById('expMax').textContent = expMax;
+      document.getElementById('gold').textContent = gold;
+      document.getElementById('power').textContent = power;
+    }
+  </script>
+</body>
+</html>
